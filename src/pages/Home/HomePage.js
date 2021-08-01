@@ -9,6 +9,7 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
 import {Appbar, Searchbar} from 'react-native-paper';
 import {Button} from 'react-native-paper';
@@ -110,9 +111,12 @@ const Item = ({title, navigation}) => (
       alignSelf: 'baseline',
       marginHorizontal: '5%',
       marginVertical: 8,
-      paddingVertical: 5,
+      paddingVertical: 10,
+      // paddingTop: 15,
       elevation: 0.5,
       borderColor: '#ddd',
+      backgroundColor: '#131313',
+      opacity: 0.8
     }}>
     <View>
       <Image
@@ -123,19 +127,19 @@ const Item = ({title, navigation}) => (
       />
     </View>
     <View>
-      <Text>UserName</Text>
+      <Text style={{ color: '#fff'}}>UserName</Text>
     </View>
     <TouchableOpacity
       onPress={() => {
         navigation.navigate('User');
       }}
       style={{
-        backgroundColor: '#000',
+        backgroundColor: '#FFF',
         marginVertical: 5,
-        padding: 5,
+        padding: 3,
         paddingHorizontal: 8,
       }}>
-      <Text style={{color: '#fff'}}>More</Text>
+      <Text style={{color: '#000'}}>More</Text>
     </TouchableOpacity>
   </View>
 );
@@ -209,74 +213,86 @@ const Home = ({navigation}) => {
   );
 
   return (
-    <View style={{flex: 1, backgroundColor: '#fff'}}>
-      <StatusBar backgroundColor="orange" barStyle="white-content" />
-      {!searchHeader ? (
-        <Appbar.Header style={{backgroundColor: 'orange'}}>
-          <Appbar.Action color="#fff" icon="github" />
+    <>
+      <View style={{flex: 1, backgroundColor: '#fff'}}>
+          <StatusBar backgroundColor="#04009A" barStyle="white-content" />
+          {!searchHeader ? (
+            <Appbar.Header style={{backgroundColor: '#04009A'}}>
+              <Appbar.Action color="#fff" icon="github" />
 
-          <Appbar.Content title="GitHub Finders" color="#fff" />
-          <Appbar.Action
-            color="#fff"
-            icon="magnify"
-            onPress={() => setSearchHeader(true)}
-          />
-        </Appbar.Header>
-      ) : (
-        <Appbar.Header
-          style={{
-            backgroundColor: 'orange',
-            fontWeight: 'bold',
-            elevation: 0,
-          }}>
-          <Appbar.Action
-            color="#fff"
-            onPress={() => {
-              setSearchHeader(false);
-              //   setShowSearch(false);
-              //   setShowSeachProducts(false);
-              //   searchGoBack();
-            }}
-            icon="chevron-left"
-            size={35}
-          />
-          <Searchbar
-            placeholder="Search"
-            returnKeyType="next"
-            iconColor="#fff"
-            placeholderTextColor="#fff"
-            selectionColor="#fff"
-            inputStyle={{color: '#fff'}}
-            autoFocus
-            onChangeText={onChangeSearch}
-            value={searchQuery}
-            onSubmitEditing={onKeybordSubmit}
-            style={{
-              fontSize: 12,
-              elevation: 0,
-              textAlign: 'center',
-              width: Dimensions.get('window').width / 1.3,
-              borderRadius: 50,
-              backgroundColor: 'orange',
-              color: '#fff',
-            }}
-          />
-        </Appbar.Header>
-      )}
+              <Appbar.Content title="GitHub Finders" color="#fff" />
+              <Appbar.Action
+                color="#fff"
+                icon="magnify"
+                onPress={() => setSearchHeader(true)}
+              />
+            </Appbar.Header>
+          ) : (
+            <Appbar.Header
+              style={{
+                backgroundColor: '#04009A',
+                fontWeight: 'bold',
+                elevation: 0,
+              }}>
+              <Appbar.Action
+                color="#fff"
+                onPress={() => {
+                  setSearchHeader(false);
+                  //   setShowSearch(false);
+                  //   setShowSeachProducts(false);
+                  //   searchGoBack();
+                }}
+                icon="chevron-left"
+                size={35}
+              />
+              <Searchbar
+                placeholder="Search"
+                returnKeyType="next"
+                iconColor="#fff"
+                placeholderTextColor="#fff"
+                selectionColor="#fff"
+                inputStyle={{color: '#fff'}}
+                autoFocus
+                onChangeText={onChangeSearch}
+                value={searchQuery}
+                onSubmitEditing={onKeybordSubmit}
+                style={{
+                  fontSize: 12,
+                  elevation: 0,
+                  textAlign: 'center',
+                  width: Dimensions.get('window').width / 1.3,
+                  borderRadius: 50,
+                  backgroundColor: '#04009A',
+                  color: '#fff',
+                }}
+              />
+            </Appbar.Header>
+          )}
+        <ImageBackground
+          style={{width: '100%', height: '100%', flex: 1,}}
+          blurRadius={5}
+          resizeMode="cover"
+          source={require('../../bg.jpg')}>
 
-      <View style={{flex: 1}}>
-        <View
-          style={{flex: 0.99, justifyContent: 'center', alignItems: 'center'}}>
-          <FlatList
-            data={DATA}
-            renderItem={renderItem}
-            keyExtractor={(item, index) => index.toString()}
-            numColumns={2}
-          />
-        </View>
-        <View style={{flex: 0.001}} />
+          <View style={{flex: 1}}>
+            <View
+              style={{
+                flex: 0.99,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <FlatList
+                data={DATA}
+                renderItem={renderItem}
+                keyExtractor={(item, index) => index.toString()}
+                numColumns={2}
+              />
+            </View>
+            <View style={{flex: 0.001}} />
+          </View>
+        </ImageBackground>
       </View>
-    </View>
+    </>
   );
 };
 
